@@ -1,0 +1,23 @@
+{
+  "name": "saucedemo_automation",
+  "description": "Ultra QA Automation Test - SauceDemo Site UI Automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AneudyM/saucedemo_automation.git"
+  },
+  "author": "Aneudy Mota",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AneudyM/saucedemo_automation/issues"
+  },
+  "homepage": "https://github.com/AneudyM/saucedemo_automation#readme",
+  "dependencies": {
+    "cypress": "^9.5.0",
+    "prettier": "^2.5.1"
+  }
+}
