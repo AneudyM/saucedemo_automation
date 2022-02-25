@@ -25,17 +25,17 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add('isVisible', selector => {
-    cy.get(selector).should('be.visible');
+Cypress.Commands.add("isVisible", selector => {
+    cy.get(selector).should("be.visible");
 });
 
-Cypress.Commands.add('isHidden', selector => {
-    cy.get(selector).should('not.exist');
+Cypress.Commands.add("isHidden", selector => {
+    cy.get(selector).should("not.exist");
 });
 
-Cypress.Commands.add('login', (username, password) => {
-   cy.get('#login_button_container').should('be.visible');
-   cy.get('#user-name').type(username);
-   cy.get('#password').type(password);
-   cy.get('#login-button').click();
+Cypress.Commands.add("login", (username, password) => {
+   cy.get('#login_button_container').should("be.visible");
+   cy.get("[data-test=username]").type(username);
+   cy.get("[data-test=password]").type(password);
+   cy.get("[data-test=login-button]").click();
 });

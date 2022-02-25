@@ -104,3 +104,7 @@ dist
 .tern-port
 
 .idea/
+
+cypress/reports/
+mochawesome.json
+mochawesome-report/

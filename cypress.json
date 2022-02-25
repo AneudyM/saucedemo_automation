@@ -1,1 +1,21 @@
-{}
+{
+  "watchForFileChanges": false,
+  "chromeWebSecurity": false,
+  "viewportWidth": 1366,
+  "viewportHeight": 768,
+  "waitForAnimations": true,
+  "animationDistanceThreshold": 20,
+  "defaultCommandTimeout": 8000,
+  "trashAssetsBeforeRuns": true,
+  "execTimeout": 60000,
+  "pageLoadTimeout": 60000,
+  "requestTimeout": 15000,
+  "responseTimeout": 15000,
+  "video": false,
+  "numTestsKeptInMemory": 12,
+  "failOnStatusCode": false,
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporterOptions.json"
+  }
+}
