@@ -1,10 +1,12 @@
 import {url} from "../../../../config";
-import LoginPage from "../../../page-objects/pages/LoginPage";
-import InventoryPage from "../../../page-objects/pages/InventoryPage";
-import InventoryItemPage from "../../../page-objects/pages/InventoryItemPage";
-import PrimaryHeader from "../../../page-objects/components/PrimaryHeader";
+import LoginPage from "../../../pageobjects/pages/LoginPage";
+import InventoryListPage from "../../../pageobjects/pages/InventoryListPage";
+import {PrimaryHeaderLocator} from "../../../pageobjects/locators/PrimaryHeaderLocator";
+import {SecondaryHeaderLocator} from "../../../pageobjects/locators/SecondaryHeaderLocator";
+import InventoryItemPage from "../../../pageobjects/pages/InventoryItemPage";
+import {InventoryItemLocator} from "../../../pageobjects/locators/InventoryItemLocator";
 
-describe("Just a test", function () {
+describe("Purchase Item Fow Test", () => {
     before(function () {
         cy.visit(url);
         cy.fixture("user").then(user => {
@@ -14,31 +16,18 @@ describe("Just a test", function () {
         });
     });
 
-    it("should allow user to click on an available item", () => {
+    it("should allow user to purchase an item successfully", () => {
         cy.fixture("item").then(item => {
-            const title = item.title;
-            InventoryPage.clickItemByTitle(title);
+            const name = item.name;
+            InventoryListPage.clickItemWithName(name);
         });
-    });
-
-    it("should verify the clicked item is the expected item", () => {
-        cy.get(".inventory_details_name.large_size").should("have.text", "Sauce Labs Bike Light");
-    });
-
-    it("should verify the clicked item's price is the expected price", () => {
-        cy.get(".inventory_details_price").should("have.text", "$9.99");
-    });
-
-    it("should allow the user to add the item to cart", () => {
+        // verify we are in the item details page or inventory item page
+        cy.isVisible(SecondaryHeaderLocator.BACK_TO_PRODUCTS_BTN);
         InventoryItemPage.clickAddToCartButton();
+        cy.isVisible(InventoryItemLocator.REMOVE_BUTTON);
+        cy.isVisible(PrimaryHeaderLocator.SHOPPING_CART_BADGE);
+
     });
 
-    it("should verify the item was successfully added to the cart", () => {
-        InventoryItemPage.displayRemoveFromCartButton();
-    });
-
-    it("should allow the user to click on the cart icon to go to cart", () => {
-        InventoryItemPage.clickShoppingCartButton();
-    });
 
 });
