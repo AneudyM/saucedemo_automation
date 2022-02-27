@@ -1,8 +1,24 @@
 import BasePage from "../BasePage";
-import {InventoryListLocator} from "../locators/InventoryListLocator";
+import {action} from "../actions/WebActions";
+import HeaderComponent from "../components/HeaderComponent";
 
 export default class InventoryListPage extends BasePage {
-    static clickItemWithName(itemName) {
-        cy.get(InventoryListLocator.INVENTORY_LIST).find(InventoryListLocator.INVENTORY_ITEM_NAME).contains(itemName).click();
+
+    static clickItem(itemName) {
+        action.clickItem(itemName)
     }
+
+    static addItemToCart(itemName) {
+        action.addToCart(itemName);
+    }
+
+    static removeItemFromCart(itemName) {
+        action.removeFromCart(itemName);
+    }
+
+    static goToCart() {
+        let header = new HeaderComponent();
+        header.clickCartIcon();
+    }
+
 }

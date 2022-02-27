@@ -1,6 +1,12 @@
 {
-  "name": "Sauce Labs Bike Light",
-  "price": "$9.99",
-  "tax": 0.80,
-  "total": 10.79
+  "bikeLight": {
+    "name": "Sauce Labs Bike Light",
+    "quantity": "1",
+    "price": "9.99"
+  },
+  "backpack": {
+    "name": "Sauce Labs Backpack",
+    "quantity": "1",
+    "price": "29.99"
+  }
 }

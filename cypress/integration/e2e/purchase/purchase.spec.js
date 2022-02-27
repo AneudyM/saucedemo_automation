@@ -1,33 +1,53 @@
-import {url} from "../../../../config";
+import {login_password, login_username, url} from "../../../../config";
 import LoginPage from "../../../pageobjects/pages/LoginPage";
 import InventoryListPage from "../../../pageobjects/pages/InventoryListPage";
-import {PrimaryHeaderLocator} from "../../../pageobjects/locators/PrimaryHeaderLocator";
-import {SecondaryHeaderLocator} from "../../../pageobjects/locators/SecondaryHeaderLocator";
-import InventoryItemPage from "../../../pageobjects/pages/InventoryItemPage";
-import {InventoryItemLocator} from "../../../pageobjects/locators/InventoryItemLocator";
+import * as item from "../../../fixtures/item.json";
+import * as user from "../../../fixtures/user.json";
+import CartPage from "../../../pageobjects/pages/CartPage";
+import {validator} from "../../../pageobjects/validators/Validators";
+import CheckoutStepOnePage from "../../../pageobjects/pages/CheckoutStepOnePage";
+import CheckoutStepTwoPage from "../../../pageobjects/pages/CheckoutStepTwoPage";
 
 describe("Purchase Item Fow Test", () => {
-    before(function () {
+    beforeEach(function () {
         cy.visit(url);
-        cy.fixture("user").then(user => {
-            const login_username = user.username;
-            const login_password = user.password;
-            LoginPage.login(login_username, login_password);
-        });
+        LoginPage.login(login_username, login_password);
     });
 
     it("should allow user to purchase an item successfully", () => {
-        cy.fixture("item").then(item => {
-            const name = item.name;
-            InventoryListPage.clickItemWithName(name);
-        });
-        // verify we are in the item details page or inventory item page
-        cy.isVisible(SecondaryHeaderLocator.BACK_TO_PRODUCTS_BTN);
-        InventoryItemPage.clickAddToCartButton();
-        cy.isVisible(InventoryItemLocator.REMOVE_BUTTON);
-        cy.isVisible(PrimaryHeaderLocator.SHOPPING_CART_BADGE);
-
+        InventoryListPage.addItemToCart(item.bikeLight.name);
+        let expectedQuantity = Number(item.bikeLight.quantity);
+        validator.verifyCartBadgeNumber(expectedQuantity);
+        InventoryListPage.goToCart();
+        CartPage.clickCheckoutButton();
+        CheckoutStepOnePage.fillOutCheckoutInfo(user.firstname, user.lastname, user.zip);
+        CheckoutStepOnePage.clickContinueButton();
+        validator.verifyCartItemName(item.bikeLight.name);
+        let expectedSubtotal = Number(item.bikeLight.price);
+        validator.verifySubtotalAmount(expectedSubtotal);
+        let expectedTotal = "10.79";
+        validator.verifyTotalAmount(expectedTotal);
+        CheckoutStepTwoPage.clickFinishButton();
+        validator.verifyPurchaseCompleted();
     });
 
+    it("should allow user to purchase multiple items successfully", () => {
+        InventoryListPage.addItemToCart(item.bikeLight.name);
+        InventoryListPage.addItemToCart(item.backpack.name);
+        let expectedQuantity = Number(item.bikeLight.quantity) + Number(item.backpack.quantity)
+        validator.verifyCartBadgeNumber(expectedQuantity);
+        InventoryListPage.goToCart();
+        validator.verifyCartItemName(item.bikeLight.name);
+        validator.verifyCartItemName(item.backpack.name);
+        CartPage.clickCheckoutButton();
+        CheckoutStepOnePage.fillOutCheckoutInfo(user.firstname, user.lastname, user.zip);
+        CheckoutStepOnePage.clickContinueButton();
+        let expectedSubtotal = Number(item.bikeLight.price) + Number(item.backpack.price);
+        validator.verifySubtotalAmount(expectedSubtotal);
+        let expectedTotal = "43.18";
+        validator.verifyTotalAmount(expectedTotal);
+        CheckoutStepTwoPage.clickFinishButton();
+        validator.verifyPurchaseCompleted();
+    });
 
 });
