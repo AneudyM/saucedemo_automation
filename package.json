@@ -6,7 +6,11 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "triggerAllTests-headless": "npx cypress run"
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "triggerAllTests-headless": "npx cypress run",
+    "cy:run:html-report": "cypress run && npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome.json && npx marge mochawesome.json -o cypress/reports/html"
+
   },
   "repository": {
     "type": "git",
