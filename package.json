@@ -10,7 +10,6 @@
     "cy:run:firefox": "cypress run --browser firefox",
     "triggerAllTests-headless": "npx cypress run",
     "cy:run:html-report": "cypress run && npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome.json && npx marge mochawesome.json -o cypress/reports/html"
-
   },
   "repository": {
     "type": "git",
@@ -23,15 +22,17 @@
   },
   "homepage": "https://github.com/AneudyM/saucedemo_automation#readme",
   "dependencies": {
-    "cypress": "^9.5.0",
     "cypress-mochawesome-reporter": "^2.3.0",
     "cypress-multi-reporters": "^1.5.0",
     "mocha": "^9.2.1",
     "mocha-multi-reporters": "^1.5.1",
-    "prettier": "^2.5.1",
-    "typescript": "^4.5.5",
     "mochawesome": "^7.1.0",
     "mochawesome-merge": "^4.2.1",
-    "mochawesome-report-generator": "^6.1.0"
+    "mochawesome-report-generator": "^6.1.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "cypress": "^9.7.0"
   }
 }

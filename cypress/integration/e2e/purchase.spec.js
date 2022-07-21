@@ -1,12 +1,12 @@
-import {login_password, login_username, url} from "../../../../config";
-import LoginPage from "../../../pageobjects/pages/LoginPage";
-import InventoryListPage from "../../../pageobjects/pages/InventoryListPage";
-import * as item from "../../../fixtures/item.json";
-import * as user from "../../../fixtures/user.json";
-import CartPage from "../../../pageobjects/pages/CartPage";
-import {validator} from "../../../pageobjects/validators/Validators";
-import CheckoutStepOnePage from "../../../pageobjects/pages/CheckoutStepOnePage";
-import CheckoutStepTwoPage from "../../../pageobjects/pages/CheckoutStepTwoPage";
+import {login_password, login_username, url} from "../../../config";
+import LoginPage from "../../pageobjects/pages/LoginPage";
+import InventoryListPage from "../../pageobjects/pages/InventoryListPage";
+import * as item from "../../fixtures/item.json";
+import * as user from "../../fixtures/user.json";
+import CartPage from "../../pageobjects/pages/CartPage";
+import {validator} from "../../pageobjects/validators/Validators";
+import CheckoutStepOnePage from "../../pageobjects/pages/CheckoutStepOnePage";
+import CheckoutStepTwoPage from "../../pageobjects/pages/CheckoutStepTwoPage";
 
 describe("Purchase Item Fow Test", () => {
     beforeEach(function () {
